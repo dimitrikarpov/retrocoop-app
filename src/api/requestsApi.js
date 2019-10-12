@@ -12,9 +12,8 @@ const api = axios.create({
 // }
 
 api.getRequests = () => {
-  const requests = { 1: 1, 2: 2 }
   return new Promise((resolve, reject) => {
-    resolve(requests)
+    resolve(requestsMock)
     // reject(err)
   })
 }
