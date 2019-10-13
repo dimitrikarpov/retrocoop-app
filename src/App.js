@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
-import './App.css'
 import { fetchPlatforms } from 'store/actions/platforms'
 import Requests from 'pages/requests/Requests'
 import AddRequest from 'pages/addRequest/AddRequest'
@@ -15,13 +14,11 @@ class App extends Component {
   render() {
     return (
       <BrowserRouter>
-        <div className='App'>
-          <Switch>
-            <Route path='/' exact component={Requests} />
-            <Route path='/add' component={AddRequest} />
-            <Route component={NotFound} />
-          </Switch>
-        </div>
+        <Switch>
+          <Route path='/' exact component={Requests} />
+          <Route path='/add' component={AddRequest} />
+          <Route component={NotFound} />
+        </Switch>
       </BrowserRouter>
     )
   }
