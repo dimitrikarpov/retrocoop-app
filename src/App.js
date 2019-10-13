@@ -5,6 +5,7 @@ import { fetchPlatforms } from 'store/actions/platforms'
 import Requests from 'pages/requests/Requests'
 import AddRequest from 'pages/addRequest/AddRequest'
 import NotFound from 'pages/notFound/NotFound'
+import Header from 'components/layout/header/Header'
 
 class App extends Component {
   componentDidMount() {
@@ -14,6 +15,7 @@ class App extends Component {
   render() {
     return (
       <BrowserRouter>
+      <Header/>
         <Switch>
           <Route path='/' exact component={Requests} />
           <Route path='/add' component={AddRequest} />
