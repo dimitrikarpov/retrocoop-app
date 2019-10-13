@@ -5,12 +5,14 @@ import thunk from 'redux-thunk'
 import { Provider } from 'react-redux'
 import './index.css'
 import App from './App'
-import requestsReducers from 'store/reducers/requests'
+import requestsReducer from 'store/reducers/requests'
+import platformsReducer from 'store/reducers/platforms'
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 
 const rootReducer = combineReducers({
-  requests: requestsReducers
+  requests: requestsReducer,
+  platforms: platformsReducer
 })
 
 const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)))
