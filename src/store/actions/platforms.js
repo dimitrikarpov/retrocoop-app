@@ -8,10 +8,10 @@ export const fetchPlatforms = () => {
     })
 
     try {
-      const platforms = await api.getPlatforms()
+      const platforms = await api.fetchAll()
       dispatch({
         type: actionTypes.FETCH_PLATFORMS_SUCCESS,
-        payload: platforms
+        payload: platforms.data
       })
     } catch (error) {
       dispatch({
