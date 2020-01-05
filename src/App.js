@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import { fetchPlatforms } from 'store/actions/platforms'
 import Requests from 'pages/requests/Requests'
 import AddRequest from 'pages/addRequest/AddRequest'
+import NewRequest from 'pages/newRequest/NewRequest'
 import NotFound from 'pages/notFound/NotFound'
 import Header from 'components/layout/header/Header'
 
@@ -18,7 +19,8 @@ class App extends Component {
       <Header/>
         <Switch>
           <Route path='/' exact component={Requests} />
-          <Route path='/add' component={AddRequest} />
+          {/* <Route path='/add' component={AddRequest} /> */}
+          <Route path='/add' component={NewRequest} />
           <Route component={NotFound} />
         </Switch>
       </BrowserRouter>

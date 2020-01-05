@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 const Input = props => (
   <div className='form-group'>
@@ -7,23 +8,20 @@ const Input = props => (
       className='form-input'
       name={props.name}
       type={props.inputType}
-      value={props.content}
-      onChange={props.controlFunc}
+      value={props.value}
+      onChange={props.onChange}
       placeholder={props.placeholder}
     />
   </div>
 )
 
 Input.propTypes = {
-  inputType: React.PropTypes.oneOf(['text', 'number']).isRequired,
-  title: React.PropTypes.string.isRequired,
-  name: React.PropTypes.string.isRequired,
-  controlFunc: React.PropTypes.func.isRequired,
-  content: React.PropTypes.oneOfType([
-    React.PropTypes.string,
-    React.PropTypes.number
-  ]).isRequired,
-  placeholder: React.PropTypes.string
+  inputType: PropTypes.oneOf(['text', 'number']).isRequired,
+  title: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+  placeholder: PropTypes.string
 }
 
 export default Input
