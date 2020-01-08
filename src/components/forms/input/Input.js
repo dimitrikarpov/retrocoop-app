@@ -15,13 +15,14 @@ const Input = props => (
   </div>
 )
 
-Input.defaultTypes = {
-  type: 'text'
+Input.defaultProps = {
+  type: 'text',
+  title: ''
 }
 
 Input.propTypes = {
-  type: PropTypes.oneOf(['text', 'number']).isRequired,
-  title: PropTypes.string.isRequired,
+  type: PropTypes.oneOf(['text', 'number']),
+  title: PropTypes.string,
   name: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
   placeholder: PropTypes.string,

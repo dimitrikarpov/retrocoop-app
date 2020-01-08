@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
-import { Formik, Field } from 'formik'
+import { Formik, Form, Field } from 'formik'
 import Input from 'components/forms/input/Input'
 
 const initialValues = {
-  game: '',
+  game: 'chip and dale',
   platform: '',
   skill: '',
   use_mic: false,
@@ -15,7 +15,7 @@ class NewRequest extends Component {
   render() {
     return (
       <Formik
-        initialValues={{ game: 'chip and dale' }}
+        initialValues={initialValues}
         onSubmit={(data, {setSubmitting, resetForm}) => {
           setSubmitting(true)
           // make async call
@@ -24,19 +24,14 @@ class NewRequest extends Component {
           resetForm()
         }}
       >
-        {({values, handleChange, handleSubmit, isSubmitting}) => (
-          <form onSubmit={handleSubmit}>
-            {/* <Field name="game" type="input" title='game' as={Input} /> */}
-            <Input
-              type='text'
-              title='game'
-              name='game'
-              value={values.game}
-              onChange={handleChange}
-            />
+        {({values, isSubmitting}) => (
+          <Form>
+            <Field name="game" as={Input} />
+
             <button disabled={isSubmitting} type="submit">Submit</button>
+
             <pre>{JSON.stringify(values, null, 2)}</pre>
-          </form>
+          </Form>
         )}
       </Formik>
     )
