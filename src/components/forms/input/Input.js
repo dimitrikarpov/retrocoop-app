@@ -7,7 +7,7 @@ const Input = props => (
     <input
       className='form-input'
       name={props.name}
-      type={props.inputType}
+      type={props.type}
       value={props.value}
       onChange={props.onChange}
       placeholder={props.placeholder}
@@ -15,13 +15,17 @@ const Input = props => (
   </div>
 )
 
+Input.defaultTypes = {
+  type: 'text'
+}
+
 Input.propTypes = {
-  inputType: PropTypes.oneOf(['text', 'number']).isRequired,
+  type: PropTypes.oneOf(['text', 'number']).isRequired,
   title: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
+  placeholder: PropTypes.string,
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-  placeholder: PropTypes.string
 }
 
 export default Input

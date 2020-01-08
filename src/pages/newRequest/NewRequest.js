@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Formik } from 'formik'
+import { Formik, Field } from 'formik'
 import Input from 'components/forms/input/Input'
 
 const initialValues = {
@@ -26,8 +26,9 @@ class NewRequest extends Component {
       >
         {({values, handleChange, handleSubmit, isSubmitting}) => (
           <form onSubmit={handleSubmit}>
+            {/* <Field name="game" type="input" title='game' as={Input} /> */}
             <Input
-              inputType='text'
+              type='text'
               title='game'
               name='game'
               value={values.game}
