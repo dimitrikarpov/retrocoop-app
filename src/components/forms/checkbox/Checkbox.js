@@ -1,45 +1,33 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-class Checkbox extends React.Component {
-  state = {
-    checked: this.props.checked
-  }
-
-  handleChange = () => {
-    this.setState({
-      checked: !this.state.checked
-    })
-  }
-
-  render() {
-    const { disabled, title } = this.props
-    const { checked } = this.state
-    return (
-      <div className='form-group'>
-        <label className='form-label'>{title}</label>
-        <input
-          type='checkbox'
-          checked={checked}
-          disabled={disabled}
-          onChange={this.handleChange}
-        />
-      </div>
-    )
-  }
-}
+const Checkbox = ({ name, disabled, title, onChange, checked, value }) => (
+  <div className='form-group'>
+    <label className='form-label'>{title}</label>
+    <input
+      name={name}
+      type='checkbox'
+      checked={checked}
+      value={value}
+      disabled={disabled}
+      onChange={onChange}
+    />
+  </div>
+)
 
 export default Checkbox
 
 Checkbox.defaultProps = {
   checked: false,
-  disabled: false
+  disabled: false,
+  value: false
 }
 
 Checkbox.propTypes = {
-  checked: PropTypes.bool,
+  name: PropTypes.string.isRequired,
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
+  checked: PropTypes.bool.isRequired,
   disabled: PropTypes.bool,
-  label: PropTypes.string
+  label: PropTypes.string,
+  onChange: PropTypes.func.isRequired
 }
-
-// more at https://codepen.io/darylw/pen/Kxaxop
