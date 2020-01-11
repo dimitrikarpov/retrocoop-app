@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Formik, Form, Field } from 'formik'
-import Input from 'components/forms/input/Input'
+import TextField from 'components/forms/textField/TextField'
 import Checkbox from 'components/forms/checkbox/Checkbox'
 import Radio from 'components/forms/radio/Radio'
 
@@ -28,7 +28,7 @@ class NewRequest extends Component {
       >
         {({ values, isSubmitting }) => (
           <Form>
-            <Field name='game' as={Input} />
+            <Field name='game' as={TextField} />
 
             <Field name='use_mic' type='checkbox' as={Checkbox} />
 
