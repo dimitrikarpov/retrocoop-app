@@ -1,18 +1,19 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
-const Select = props => (
+const Select = ({ name, value, options, placeholder, onChange }) => (
   <div className='form-group'>
     <select
-      name={props.name}
-      value={props.selectedOption}
-      onChange={props.controlFunc}
+      name={name}
+      value={value}
+      onChange={onChange}
       className='form-select'
     >
-      <option value=''>{props.placeholder}</option>
-      {props.options.map(opt => {
+      <option value=''>{placeholder}</option>
+      {options.map(option => {
         return (
-          <option key={opt} value={opt}>
-            {opt}
+          <option key={option.value} value={option.value}>
+            {option.title}
           </option>
         )
       })}
@@ -20,12 +21,19 @@ const Select = props => (
   </div>
 )
 
+Select.defaultProps = {
+  value: '',
+}
+
 Select.propTypes = {
-  name: React.PropTypes.string.isRequired,
-  options: React.PropTypes.array.isRequired,
-  selectedOption: React.PropTypes.string,
-  controlFunc: React.PropTypes.func.isRequired,
-  placeholder: React.PropTypes.string
+  name: PropTypes.string.isRequired,
+  value: PropTypes.string,
+  options: PropTypes.arrayOf(PropTypes.shape({
+    value: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired
+  })).isRequired,
+  placeholder: PropTypes.string,
+  onChange: PropTypes.func.isRequired
 }
 
 export default Select
