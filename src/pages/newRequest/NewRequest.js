@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Formik, Form, Field } from 'formik'
 import Input from 'components/forms/input/Input'
 import Checkbox from 'components/forms/checkbox/Checkbox'
+import Radio from 'components/forms/radio/Radio'
 
 const initialValues = {
   game: 'chip and dale',
@@ -30,6 +31,11 @@ class NewRequest extends Component {
             <Field name='game' as={Input} />
 
             <Field name='use_mic' type='checkbox' as={Checkbox} />
+
+            <div>skill:</div>
+            <Field name="skill" type="radio" value="1" label="not played before" as={Radio} />
+            <Field name="skill" type="radio" value="2" label="I know this game" as={Radio} />
+            <Field name="skill" type="radio" value="3" label="I'm pro in this game" as={Radio} />
 
             <button disabled={isSubmitting} type='submit'>
               Submit
