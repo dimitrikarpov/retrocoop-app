@@ -1,9 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-const Radio = ({ name, disabled, label, onChange, checked, value }) => (
+const Radio = ({ name, disabled, onChange, checked, value }) => (
   <div className='form-group'>
-    <label className='form-label'>{label}</label>
     <input
       name={name}
       type='radio'
@@ -28,6 +27,5 @@ Radio.propTypes = {
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
   checked: PropTypes.bool.isRequired,
   disabled: PropTypes.bool,
-  label: PropTypes.string,
   onChange: PropTypes.func.isRequired
 }

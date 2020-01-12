@@ -1,9 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-const TextField = ({label, name, type, value, placeholder, helperText, onChange}) => (
+const TextField = ({name, type, value, placeholder, helperText, onChange}) => (
   <div className='form-group'>
-    <label className='form-label'>{label}</label>
     <input
       className='form-input'
       name={name}
@@ -25,7 +24,6 @@ TextField.defaultProps = {
 TextField.propTypes = {
   name: PropTypes.string.isRequired,
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-  label: PropTypes.string,
   placeholder: PropTypes.string,
   helperText: PropTypes.string,
   type: PropTypes.oneOf(['text', 'number', 'date', 'time', 'email', 'datetime-local']),

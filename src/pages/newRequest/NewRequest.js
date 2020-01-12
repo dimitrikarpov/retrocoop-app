@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Formik, Form, Field, useField } from 'formik'
+import './newRequestForm.css'
 import TextField from 'components/forms/textField/TextField'
 import Checkbox from 'components/forms/checkbox/Checkbox'
 import Radio from 'components/forms/radio/Radio'
@@ -12,20 +13,18 @@ const platforms = [
   { value: 'smd', title: 'sega mega drive' }
 ]
 
-const initialValues = {
-  game: 'chip and dale',
-  platform: '',
-  skill: '',
-  use_mic: false,
-  starts_at: '',
-  ends_at: ''
-}
-
 class NewRequest extends Component {
   render() {
     return (
       <Formik
-        initialValues={initialValues}
+        initialValues={{
+          game: '',
+          platform: '',
+          skill: '',
+          use_mic: true,
+          starts_at: '',
+          ends_at: ''
+        }}
         onSubmit={(data, { setSubmitting, resetForm }) => {
           setSubmitting(true)
           // make async call
@@ -33,7 +32,7 @@ class NewRequest extends Component {
           setSubmitting(false)
           resetForm()
         }}
-        validate={(values) => {
+        validate={values => {
           const errors = {}
 
           if (values.game === '') {
@@ -45,43 +44,56 @@ class NewRequest extends Component {
       >
         {({ values, errors, isSubmitting }) => (
           <Form>
-            <Field name="starts_at" type="datetime-local" as={StartsAtField} />
+            <div className='form-grid'>
+              <label htmlFor='starts_at'>Starts At</label>
+              <Field
+                name='starts_at'
+                type='datetime-local'
+                as={StartsAtField}
+              />
 
-            <Field name="ends_at" as={EndsAtField} />
+              <label htmlFor='ends_at'>Ends At</label>
+              <Field name='ends_at' as={EndsAtField} />
 
-            <Field name='game' as={GameField} />
+              <label htmlFor='use_mic'>Do You Want To Use Microphone? </label>
+              <Field name='use_mic' type='checkbox' as={Checkbox} />
 
-            <Field name='use_mic' type='checkbox' as={Checkbox} />
+              <label htmlFor='game'>Game You Want To Play</label>
+              <Field name='game' as={GameField} />
 
-            <div>skill:</div>
-            <Field
-              name='skill'
-              type='radio'
-              value='1'
-              label='not played before'
-              as={Radio}
-            />
-            <Field
-              name='skill'
-              type='radio'
-              value='2'
-              label='I know this game'
-              as={Radio}
-            />
-            <Field
-              name='skill'
-              type='radio'
-              value='3'
-              label="I'm pro in this game"
-              as={Radio}
-            />
+              <label htmlFor='platform'>Or choose platform</label>
+              <Field
+                name='platform'
+                options={platforms}
+                placeholder='select platform'
+                as={Select}
+              />
 
-            <Field
-              name='platform'
-              options={platforms}
-              placeholder='select platform'
-              as={Select}
-            />
+              <label>What is You skill in this game</label>
+              <div>
+                <Field
+                  name='skill'
+                  type='radio'
+                  value='1'
+                  label='not played before'
+                  as={Radio}
+                />
+                <Field
+                  name='skill'
+                  type='radio'
+                  value='2'
+                  label='I know this game'
+                  as={Radio}
+                />
+                <Field
+                  name='skill'
+                  type='radio'
+                  value='3'
+                  label="I'm pro in this game"
+                  as={Radio}
+                />
+              </div>
+            </div>
 
             <button disabled={isSubmitting} type='submit'>
               Submit
@@ -104,7 +116,7 @@ const GameField = props => {
   return <TextField {...field} helperText={errorText} />
 }
 
-const StartsAtField = ({type, ...props}) => {
+const StartsAtField = ({ type, ...props }) => {
   const [field, meta] = useField(props)
   const errorText = meta.error && meta.touched ? meta.error : ''
 
@@ -115,5 +127,5 @@ const EndsAtField = props => {
   const [field, meta] = useField(props)
   const errorText = meta.error && meta.touched ? meta.error : ''
 
-  return <TextField {...field} type="datetime-local" helperText={errorText} />
+  return <TextField {...field} type='datetime-local' helperText={errorText} />
 }
