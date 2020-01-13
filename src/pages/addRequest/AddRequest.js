@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Formik, Form, Field, useField } from 'formik'
 import * as yup from 'yup'
-import './newRequestForm.scss'
+import './styles.scss'
 import TextField from 'components/forms/textField/TextField'
 import Checkbox from 'components/forms/checkbox/Checkbox'
 import Radio from 'components/forms/radio/Radio'
@@ -24,7 +24,7 @@ const validationSchema = yup.object({
   ends_at: yup.date().required()
 })
 
-class NewRequest extends Component {
+class AddRequest extends Component {
   render() {
     return (
       <Formik
@@ -113,7 +113,7 @@ class NewRequest extends Component {
   }
 }
 
-export default NewRequest
+export default AddRequest
 
 const GameField = props => {
   const [field, meta] = useField(props)
