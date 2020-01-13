@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Formik, Form, Field, useField } from 'formik'
+import * as yup from 'yup'
 import './newRequestForm.scss'
 import TextField from 'components/forms/textField/TextField'
 import Checkbox from 'components/forms/checkbox/Checkbox'
@@ -12,6 +13,16 @@ const platforms = [
   { value: 'snes', title: 'super nintendo' },
   { value: 'smd', title: 'sega mega drive' }
 ]
+
+const validationSchema = yup.object({
+  game: yup
+    .string()
+    .required()
+    .max(25),
+  platform: yup.number(),
+  starts_at: yup.date().required(),
+  ends_at: yup.date().required()
+})
 
 class NewRequest extends Component {
   render() {
@@ -32,15 +43,7 @@ class NewRequest extends Component {
           setSubmitting(false)
           resetForm()
         }}
-        validate={values => {
-          const errors = {}
-
-          if (values.game === '') {
-            errors.game = 'game is required'
-          }
-
-          return errors
-        }}
+        validationSchema={validationSchema}
       >
         {({ values, errors, isSubmitting }) => (
           <Form>
