@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Formik, Form, Field, useField } from 'formik'
-import './newRequestForm.css'
+import './newRequestForm.scss'
 import TextField from 'components/forms/textField/TextField'
 import Checkbox from 'components/forms/checkbox/Checkbox'
 import Radio from 'components/forms/radio/Radio'
@@ -71,33 +71,36 @@ class NewRequest extends Component {
 
               <label>What is You skill in this game</label>
               <div>
-                <Field
-                  name='skill'
-                  type='radio'
-                  value='1'
-                  label='not played before'
-                  as={Radio}
-                />
-                <Field
-                  name='skill'
-                  type='radio'
-                  value='2'
-                  label='I know this game'
-                  as={Radio}
-                />
-                <Field
-                  name='skill'
-                  type='radio'
-                  value='3'
-                  label="I'm pro in this game"
-                  as={Radio}
-                />
+                <label className='form__skill'>
+                  <Field name='skill' type='radio' value='1' as={Radio} />
+                  <span className='form__skill-label'>not played before</span>
+                </label>
+
+                <label className='form__skill'>
+                  <Field
+                    name='skill'
+                    type='radio'
+                    value='2'
+                    label=''
+                    as={Radio}
+                  />
+                  <span className='form__skill-label'>I know this game</span>
+                </label>
+
+                <label className='form__skill'>
+                  <Field name='skill' type='radio' value='3' as={Radio} />
+                  <span className='form__skill-label'>
+                    I'm pro in this game
+                  </span>
+                </label>
               </div>
             </div>
 
-            <button disabled={isSubmitting} type='submit'>
-              Submit
-            </button>
+            <div className='form__submit-block'>
+              <button disabled={isSubmitting} type='submit'>
+                Submit
+              </button>
+            </div>
 
             <pre>{JSON.stringify(values, null, 2)}</pre>
           </Form>

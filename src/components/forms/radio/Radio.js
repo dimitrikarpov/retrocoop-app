@@ -2,16 +2,14 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 const Radio = ({ name, disabled, onChange, checked, value }) => (
-  <div className='form-group'>
-    <input
-      name={name}
-      type='radio'
-      checked={checked}
-      value={value}
-      disabled={disabled}
-      onChange={onChange}
-    />
-  </div>
+  <input
+    name={name}
+    type='radio'
+    checked={checked}
+    value={value}
+    disabled={disabled}
+    onChange={onChange}
+  />
 )
 
 export default Radio
