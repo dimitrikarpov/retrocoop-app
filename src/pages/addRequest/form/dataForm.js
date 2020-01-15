@@ -1,4 +1,6 @@
 import React from 'react'
+import { shape, arrayOf, string } from 'prop-types'
+import { connect } from 'react-redux'
 import { Formik, Form, Field } from 'formik'
 import * as yup from 'yup'
 import './styles.scss'
@@ -6,13 +8,6 @@ import { GameField, StartsAtField, EndsAtField } from './components'
 import Checkbox from 'components/forms/checkbox/Checkbox'
 import Radio from 'components/forms/radio/Radio'
 import Select from 'components/forms/select/Select'
-
-const platforms = [
-  { value: 'zx', title: 'zx-spectrum' },
-  { value: 'nes', title: 'nintedo entertainemt system' },
-  { value: 'snes', title: 'super nintendo' },
-  { value: 'smd', title: 'sega mega drive' }
-]
 
 const validationSchema = yup.object({
   game: yup
@@ -24,7 +19,7 @@ const validationSchema = yup.object({
   ends_at: yup.date().required()
 })
 
-const DataForm = props => (
+const DataForm = ({ platforms }) => (
   <Formik
     initialValues={{
       game: '',
@@ -97,4 +92,30 @@ const DataForm = props => (
   </Formik>
 )
 
-export default DataForm
+const mapStateToProps = state => {
+  const statePlatforms = state.platforms.platforms
+  const platforms = statePlatforms
+    ? statePlatforms.reduce(
+        (acc, item) => [...acc, { value: item.id, title: item.title }],
+        []
+      )
+    : []
+
+  return { platforms }
+}
+
+export default connect(mapStateToProps)(DataForm)
+
+DataForm.defaultProps = {
+  platforms: []
+}
+
+DataForm.propTypes = {
+  platforms: arrayOf(
+    shape({
+      id: string,
+      title: string,
+      slug: string
+    })
+  )
+}
