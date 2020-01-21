@@ -3,7 +3,8 @@ import requestsMock from 'api/mock/requests'
 
 import {
   API_REQUESTS_BASE_URL as BASE,
-  API_REQUESTS_FETCH_ALL_ENDPOINT as FETCH_ALL
+  API_REQUESTS_FETCH_ALL_ENDPOINT as FETCH_ALL,
+  API_REQUESTS_POST_ENDPOINT as POST
 } from './constants'
 
 const api = axios.create({
@@ -21,6 +22,13 @@ api.getRequests = async () => {
   const res = await api.get(FETCH_ALL)
 
   return res.data
+}
+
+api.postRequest = async (data) => {
+  const res = await api.post(POST, data)
+
+  return res.data
+
 }
 
 export default api
