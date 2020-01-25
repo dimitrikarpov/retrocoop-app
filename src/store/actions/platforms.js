@@ -1,27 +1,21 @@
 import * as actionTypes from 'store/actions/actionsTypes'
-// import api from 'api/platformsApi'
 import PlatformsService from 'api/services/platforms'
 
-export const fetchPlatforms = () => {
+export const fetchPlatforms = () => async dispatch => {
+  dispatch({
+    type: actionTypes.FETCH_PLATFORMS_START
+  })
 
-  console.log(PlatformsService)
-
-  return async dispatch => {
+  try {
+    const platforms = await PlatformsService.getAll()
     dispatch({
-      type: actionTypes.FETCH_PLATFORMS_START
+      type: actionTypes.FETCH_PLATFORMS_SUCCESS,
+      payload: platforms.data
     })
-
-    try {
-      const platforms = await PlatformsService.getAll()
-      dispatch({
-        type: actionTypes.FETCH_PLATFORMS_SUCCESS,
-        payload: platforms.data
-      })
-    } catch (error) {
-      dispatch({
-        type: actionTypes.FETCH_PLATFORMS_FAIL,
-        error
-      })
-    }
+  } catch (error) {
+    dispatch({
+      type: actionTypes.FETCH_PLATFORMS_FAIL,
+      error
+    })
   }
 }

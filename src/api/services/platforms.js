@@ -2,22 +2,20 @@ import request from '../request'
 
 const endpoint = '/platforms'
 
- function getAll() {
-  return  request({
+const getAll = () =>
+  request({
     url: `${endpoint}`,
     method: 'GET'
   })
-}
 
-function get(id) {
-  return request({
+const get = id =>
+  request({
     url: `${endpoint}/${id}`,
     method: 'GET'
   })
-}
 
-function create({ subject, content }) {
-  return request({
+const create = ({ subject, content }) =>
+  request({
     url: `${endpoint}`,
     method: 'POST',
     data: {
@@ -25,7 +23,6 @@ function create({ subject, content }) {
       content
     }
   })
-}
 
 export default {
   getAll,

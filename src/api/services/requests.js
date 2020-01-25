@@ -1,32 +1,33 @@
 import request from '../request'
 
-function getAll() {
-  return request({
-    url: `/requests`,
+const endpoint = '/platforms'
+
+const getAll = () =>
+  request({
+    url: `${endpoint}`,
     method: 'GET'
   })
-}
 
-function get(id) {
-  return request({
-    url:    `/requests/${id}`,
+const get = id =>
+  request({
+    url: `${endpoint}/${id}`,
     method: 'GET'
-  });
-}
+  })
 
-function create({subject, content}) {
-  return request({
-    url:    '/requests/',
+const create = ({ subject, content }) =>
+  request({
+    url: `${endpoint}`,
     method: 'POST',
-    data:   {
+    data: {
       subject,
       content
     }
-  });
-}
+  })
 
 const RequestsService = {
-  getAll, get, create //, update, delete, etc. ...
+  getAll,
+  get,
+  create //, update, delete, etc. ...
 }
 
-export default RequestsService;
+export default RequestsService
