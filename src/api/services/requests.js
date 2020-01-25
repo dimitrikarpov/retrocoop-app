@@ -1,6 +1,6 @@
 import request from '../request'
 
-const endpoint = '/platforms'
+const endpoint = '/requests'
 
 const getAll = () =>
   request({
@@ -14,14 +14,11 @@ const get = id =>
     method: 'GET'
   })
 
-const create = ({ subject, content }) =>
+const create = data =>
   request({
     url: `${endpoint}`,
     method: 'POST',
-    data: {
-      subject,
-      content
-    }
+    data
   })
 
 const RequestsService = {
