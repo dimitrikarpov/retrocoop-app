@@ -1,0 +1,26 @@
+.form-group {
+  display: flex;
+  flex-direction: column;
+
+  font-size: 1.5rem;
+
+  input:not([type='checkbox']),
+  select {
+    width: 100%;
+  }
+}
+
+.form-input {
+  &--error {
+    border: 1px solid red;
+  }
+
+  &__helper-text {
+    margin-top: 1rem;
+    display: inline-block;
+
+    &--error {
+      color: red;
+    }
+  }
+}

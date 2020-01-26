@@ -4,10 +4,10 @@ import { connect } from 'react-redux'
 import { Formik, Form, Field } from 'formik'
 import * as yup from 'yup'
 import './styles.scss'
-import { GameField, StartsAtField, EndsAtField } from './components'
+import { GameField, StartsAtField, EndsAtField, PlatformField } from './components'
 import Checkbox from 'components/forms/checkbox/Checkbox'
 import Radio from 'components/forms/radio/Radio'
-import Select from 'components/forms/select/Select'
+import RequestsService from 'api/services/requests'
 
 const validationSchema = yup.object({
   game: yup
@@ -22,19 +22,41 @@ const validationSchema = yup.object({
 const DataForm = ({ platforms }) => (
   <Formik
     initialValues={{
-      game: '',
+      game: 'ррррлр',
       platform: '',
       skill: '',
       use_mic: true,
-      starts_at: '',
-      ends_at: ''
+      starts_at: '2020-01-09T05:04',
+      ends_at: '2020-01-09T05:04'
+      // starts_at: '',
+      // ends_at: ''
     }}
-    onSubmit={(data, { setSubmitting, resetForm }) => {
+    onSubmit={(
+      data,
+      { setSubmitting, resetForm, setErrors }
+    ) => {
       setSubmitting(true)
       // make async call
-      console.log('submit data', data)
+
+      RequestsService.create(data)
+        .then(res => {
+          console.log('created succefully', res)
+          resetForm()
+        })
+        .catch(error => {
+          const {
+            status,
+            data: { errors }
+          } = error
+
+          if (status === 422 && errors) {
+            setErrors(errors)
+          } else {
+            console.log('Error while creating new COOP', error)
+          }
+        })
+
       setSubmitting(false)
-      resetForm()
     }}
     validationSchema={validationSchema}
   >
@@ -42,7 +64,7 @@ const DataForm = ({ platforms }) => (
       <Form>
         <div className='form-grid'>
           <label htmlFor='starts_at'>Starts At</label>
-          <Field name='starts_at' type='datetime-local' as={StartsAtField} />
+          <Field name='starts_at' as={StartsAtField} />
 
           <label htmlFor='ends_at'>Ends At</label>
           <Field name='ends_at' as={EndsAtField} />
@@ -58,7 +80,7 @@ const DataForm = ({ platforms }) => (
             name='platform'
             options={platforms}
             placeholder='select platform'
-            as={Select}
+            as={PlatformField}
           />
 
           <label>What is You skill in this game</label>

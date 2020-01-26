@@ -1,34 +1,50 @@
 import React from 'react'
-import PropTypes from 'prop-types'
+import { string, oneOfType, number, oneOf, bool, func } from 'prop-types'
+import cn from 'classnames'
+import '../styles.scss'
 
-const TextField = ({name, type, value, placeholder, helperText, onChange}) => (
+const TextField = ({
+  name,
+  type,
+  value,
+  placeholder,
+  helperText,
+  error,
+  onChange
+}) => (
   <div className='form-group'>
     <input
-      className='form-input'
+      className={cn('form-input', { 'form-input--error': error })}
       name={name}
       type={type}
       value={value}
       onChange={onChange}
       placeholder={placeholder}
-      autoComplete="off"
+      autoComplete='off'
     />
-    <span>{helperText}</span>
+    <span
+      className={cn('form-input__helper-text', {
+        'form-input__helper-text--error': error
+      })}
+    >
+      {helperText}
+    </span>
   </div>
 )
 
 TextField.defaultProps = {
   type: 'text',
-  error: false,
+  error: false
 }
 
 TextField.propTypes = {
-  name: PropTypes.string.isRequired,
-  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-  placeholder: PropTypes.string,
-  helperText: PropTypes.string,
-  type: PropTypes.oneOf(['text', 'number', 'date', 'time', 'email', 'datetime-local']),
-  error: PropTypes.bool,
-  onChange: PropTypes.func.isRequired,
+  name: string.isRequired,
+  value: oneOfType([string, number]).isRequired,
+  placeholder: string,
+  helperText: string,
+  type: oneOf(['text', 'number', 'date', 'time', 'email', 'datetime-local']),
+  error: bool,
+  onChange: func.isRequired
 }
 
 export default TextField
