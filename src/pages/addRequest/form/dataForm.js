@@ -4,7 +4,12 @@ import { connect } from 'react-redux'
 import { Formik, Form, Field } from 'formik'
 import * as yup from 'yup'
 import './styles.scss'
-import { GameField, StartsAtField, EndsAtField, PlatformField } from './components'
+import {
+  GameField,
+  StartsAtField,
+  EndsAtField,
+  PlatformField
+} from './components'
 import Checkbox from 'components/forms/checkbox/Checkbox'
 import Radio from 'components/forms/radio/Radio'
 import RequestsService from 'api/services/requests'
@@ -31,10 +36,7 @@ const DataForm = ({ platforms }) => (
       // starts_at: '',
       // ends_at: ''
     }}
-    onSubmit={(
-      data,
-      { setSubmitting, resetForm, setErrors }
-    ) => {
+    onSubmit={(data, { setSubmitting, resetForm, setErrors }) => {
       setSubmitting(true)
       // make async call
 
@@ -62,50 +64,58 @@ const DataForm = ({ platforms }) => (
   >
     {({ values, isSubmitting }) => (
       <Form>
-        <div className='form-grid'>
-          <label htmlFor='starts_at'>Starts At</label>
-          <Field name='starts_at' as={StartsAtField} />
+        <div className='form-container'>
+          <div className='form-grid'>
+            <label htmlFor='starts_at'>Starts At</label>
+            <Field name='starts_at' as={StartsAtField} />
 
-          <label htmlFor='ends_at'>Ends At</label>
-          <Field name='ends_at' as={EndsAtField} />
+            <label htmlFor='ends_at'>Ends At</label>
+            <Field name='ends_at' as={EndsAtField} />
 
-          <label htmlFor='use_mic'>Do You Want To Use Microphone? </label>
-          <Field name='use_mic' type='checkbox' as={Checkbox} />
+            <label htmlFor='use_mic'>Do You Want To Use Microphone? </label>
+            <Field name='use_mic' type='checkbox' as={Checkbox} />
 
-          <label htmlFor='game'>Game You Want To Play</label>
-          <Field name='game' as={GameField} />
+            <label htmlFor='game'>Game You Want To Play</label>
+            <Field name='game' as={GameField} />
 
-          <label htmlFor='platform'>Or choose platform</label>
-          <Field
-            name='platform'
-            options={platforms}
-            placeholder='select platform'
-            as={PlatformField}
-          />
+            <label htmlFor='platform'>Or choose platform</label>
+            <Field
+              name='platform'
+              options={platforms}
+              placeholder='select platform'
+              as={PlatformField}
+            />
 
-          <label>What is You skill in this game</label>
-          <div>
-            <label className='form__skill'>
-              <Field name='skill' type='radio' value='1' as={Radio} />
-              <span className='form__skill-label'>not played before</span>
-            </label>
+            <label>What is You skill in this game</label>
+            <div>
+              <label className='form__skill'>
+                <Field name='skill' type='radio' value='1' as={Radio} />
+                <span className='form__skill-label'>not played before</span>
+              </label>
 
-            <label className='form__skill'>
-              <Field name='skill' type='radio' value='2' label='' as={Radio} />
-              <span className='form__skill-label'>I know this game</span>
-            </label>
+              <label className='form__skill'>
+                <Field
+                  name='skill'
+                  type='radio'
+                  value='2'
+                  label=''
+                  as={Radio}
+                />
+                <span className='form__skill-label'>I know this game</span>
+              </label>
 
-            <label className='form__skill'>
-              <Field name='skill' type='radio' value='3' as={Radio} />
-              <span className='form__skill-label'>I'm pro in this game</span>
-            </label>
+              <label className='form__skill'>
+                <Field name='skill' type='radio' value='3' as={Radio} />
+                <span className='form__skill-label'>I'm pro in this game</span>
+              </label>
+            </div>
           </div>
-        </div>
 
-        <div className='form__submit-block'>
-          <button disabled={isSubmitting} type='submit'>
-            Submit
-          </button>
+          <div className='form__submit-block'>
+            <button disabled={isSubmitting} type='submit'>
+              Submit
+            </button>
+          </div>
         </div>
 
         <pre>{JSON.stringify(values, null, 2)}</pre>

@@ -1,3 +1,11 @@
+.form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  padding-top: 5rem;
+}
+
 .form-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -12,13 +20,11 @@
 .form__skill {
   display: block;
 
-  .form__skill-label {
-      margin-left: 1rem;
+  &-label {
+    margin-left: 1rem;
   }
 }
 
 .form__submit-block {
-    display: flex;
-    justify-content: center;
-    padding: 3rem;
+  padding: 3rem;
 }
