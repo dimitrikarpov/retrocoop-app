@@ -8,7 +8,8 @@ import {
   GameField,
   StartsAtField,
   EndsAtField,
-  PlatformField
+  PlatformField,
+  GameAutocomplete
 } from './components'
 import Checkbox from 'components/forms/checkbox/Checkbox'
 import Radio from 'components/forms/radio/Radio'
@@ -64,6 +65,7 @@ const DataForm = ({ platforms }) => (
   >
     {({ values, isSubmitting }) => (
       <Form>
+        <GameAutocomplete />
         <div className='form-container'>
           <div className='form-grid'>
             <label htmlFor='starts_at'>Starts At</label>
