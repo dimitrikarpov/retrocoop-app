@@ -2,11 +2,13 @@ import request from '../request'
 
 const endpoint = '/games'
 
-const getAll = (data ={}) =>
+const getAll = (params = {}) =>
   request({
     url: `${endpoint}`,
     method: 'GET',
-    data
+    params: {
+      ...params
+    }
   })
 
 const get = id =>
