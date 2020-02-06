@@ -4,12 +4,12 @@ import { connect } from 'react-redux'
 import { Formik, Form, Field } from 'formik'
 import * as yup from 'yup'
 import './styles.scss'
-import {
-  GameField,
-  StartsAtField,
-  EndsAtField,
-  PlatformField
-} from './components'
+
+import GameField from './components/GameField'
+import StartsAtField from './components/StartsAtField'
+import EndsAtField from './components/EndsAtField'
+import PlatformField from './components/PlatformField'
+
 import Checkbox from 'components/forms/checkbox/Checkbox'
 import Radio from 'components/forms/radio/Radio'
 import RequestsService from 'api/services/requests'
