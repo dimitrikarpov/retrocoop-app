@@ -1,28 +1,8 @@
 import React from 'react'
-import { compose, mapProps } from 'recompose'
 import { useField } from 'formik'
-import Autocomplete from 'components/forms/autocomplete/Autocomplete'
-import withDataFetching from 'components/forms/autocomplete/withDataFetching'
 import TextField from 'components/forms/textField/TextField'
 import Select from 'components/forms/select/Select'
-import GamesService from 'api/services/games'
 
-const GameAutocomplete = compose(
-  withDataFetching({
-    request: GamesService.getAll,
-    params: { limit: 5 }
-  }),
-  mapProps(ownerProps => {
-    const data = ownerProps.results.map(({ id, title }) => ({
-      value: id,
-      title: title
-    }))
-
-    return {
-      options: data
-    }
-  })
-)(Autocomplete)
 
 const GameField = props => {
   const [field, meta] = useField(props)
@@ -78,6 +58,5 @@ export {
   GameField,
   StartsAtField,
   EndsAtField,
-  PlatformField,
-  GameAutocomplete
+  PlatformField
 }

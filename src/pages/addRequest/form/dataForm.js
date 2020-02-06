@@ -8,12 +8,13 @@ import {
   GameField,
   StartsAtField,
   EndsAtField,
-  PlatformField,
-  GameAutocomplete
+  PlatformField
 } from './components'
 import Checkbox from 'components/forms/checkbox/Checkbox'
 import Radio from 'components/forms/radio/Radio'
 import RequestsService from 'api/services/requests'
+import GamesService from 'api/newservices/games'
+import Autocomplete from 'components/forms/autocomplete/Autocomplete'
 
 const validationSchema = yup.object({
   game: yup
@@ -65,7 +66,16 @@ const DataForm = ({ platforms }) => (
   >
     {({ values, isSubmitting }) => (
       <Form>
-        <GameAutocomplete />
+        <Autocomplete
+          name='game2'
+          fetch={GamesService.get}
+          field='title'
+          transformResponse={response => {
+            const data = JSON.parse(response)
+            return data.data.map(game => ({ value: game.id, title: game.title }))
+          }}
+        />
+
         <div className='form-container'>
           <div className='form-grid'>
             <label htmlFor='starts_at'>Starts At</label>
@@ -153,3 +163,5 @@ DataForm.propTypes = {
     })
   )
 }
+
+// {"success":true,"count":4,"data":[{"images":["http://127.0.0.1:3003/images/zx-10th-frame/1.gif","http://127.0.0.1:3003/images/zx-10th-frame/2.gif","http://127.0.0.1:3003/images/zx-10th-frame/3.gif","http://127.0.0.1:3003/images/zx-10th-frame/4.gif"],"_id":"5de3f6f4c9af1c2c631dd76c","platform":{"_id":"5de3f6eb293acc2c2fdb7e9e","title":"ZX-Spectrum","slug":"zx","id":"5de3f6eb293acc2c2fdb7e9e"},"title":"10th Frame","description":"Hic modi doloremque temporibus iure aut est consectetur repudiandae. Tenetur ut molestiae sequi sit nam porro accusamus. Ut commodi cumque autem asperiores rerum et quia doloremque. Est laborum voluptates consequatur. Tempore iste laborum molestias ullam.","__v":0,"id":"5de3f6f4c9af1c2c631dd76c"},{"images":["http://127.0.0.1:3003/images/zx-1942/1.gif","http://127.0.0.1:3003/images/zx-1942/2.gif","http://127.0.0.1:3003/images/zx-1942/3.gif"],"_id":"5de3f6f4c9af1c2c631dd76f","platform":{"_id":"5de3f6eb293acc2c2fdb7e9e","title":"ZX-Spectrum","slug":"zx","id":"5de3f6eb293acc2c2fdb7e9e"},"title":"1942","description":"Cupiditate cupiditate aut consequatur et. Vitae ea minus assumenda tempora accusantium ipsam voluptatem est dolor. Ea nobis maiores id ipsa. Aut qui tempore corporis. Et ratione alias ab perferendis adipisci debitis consequuntur.","__v":0,"id":"5de3f6f4c9af1c2c631dd76f"},{"images":["http://127.0.0.1:3003/images/zx-1942-mission/1.gif","http://127.0.0.1:3003/images/zx-1942-mission/2.gif"],"_id":"5de3f6f4c9af1c2c631dd770","platform":{"_id":"5de3f6eb293acc2c2fdb7e9e","title":"ZX-Spectrum","slug":"zx","id":"5de3f6eb293acc2c2fdb7e9e"},"title":"1942 Mission","description":"Quibusdam libero aperiam maiores ut adipisci veritatis possimus et. Rem et nesciunt. Aut quis dolore consequuntur qui nihil et labore nihil quis. Odit rerum velit sed provident et.","__v":0,"id":"5de3f6f4c9af1c2c631dd770"},{"images":["http://127.0.0.1:3003/images/zx-180-mad-games/1.gif","http://127.0.0.1:3003/images/zx-180-mad-games/2.gif","http://127.0.0.1:3003/images/zx-180-mad-games/3.gif"],"_id":"5de3f6f4c9af1c2c631dd76d","platform":{"_id":"5de3f6eb293acc2c2fdb7e9e","title":"ZX-Spectrum","slug":"zx","id":"5de3f6eb293acc2c2fdb7e9e"},"title":"180! (Mad Games)","description":"Sunt reprehenderit quam inventore sapiente totam eos qui voluptatem consectetur. Pariatur ea et voluptatum explicabo voluptatem quaerat neque vero eos. Doloribus deserunt nostrum alias et dolores repellendus inventore voluptas. Magni facilis pariatur est eaque quasi quidem repudiandae reprehenderit tempore. Beatae et et corrupti repudiandae vel rerum delectus veniam. Ex magnam doloremque optio.","__v":0,"id":"5de3f6f4c9af1c2c631dd76d"}],"pagination":{"next":{"page":2,"limit":4}}}
