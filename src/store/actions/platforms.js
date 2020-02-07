@@ -1,5 +1,5 @@
 import * as actionTypes from 'store/actions/actionsTypes'
-import PlatformsService from 'api/services/platforms'
+import PlatformsService from 'api/newservices/platforms'
 
 export const fetchPlatforms = () => async dispatch => {
   dispatch({
@@ -7,7 +7,7 @@ export const fetchPlatforms = () => async dispatch => {
   })
 
   try {
-    const platforms = await PlatformsService.getAll()
+    const platforms = await PlatformsService.get()
     dispatch({
       type: actionTypes.FETCH_PLATFORMS_SUCCESS,
       payload: platforms.data
