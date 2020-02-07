@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
-import RequestService from 'api/services/requests'
+import CoopsService from 'api/newservices/coops'
 
 class Requests extends Component {
   componentDidMount() {
-    RequestService.getAll();
+    CoopsService.get()
   }
 
   render() {

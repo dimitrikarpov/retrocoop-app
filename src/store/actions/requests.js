@@ -1,5 +1,5 @@
 import * as actionTypes from 'store/actions/actionsTypes'
-import RequestsService from 'api/services/requests'
+import CoopsService from 'api/newservices/coops'
 
 const fetchRequestsStart = () => ({
   type: actionTypes.FETCH_REQESTS_START
@@ -20,7 +20,7 @@ export const fetchRequests = () => {
     dispatch(fetchRequestsStart())
 
     try {
-      const requests = await RequestsService.getAll()
+      const requests = await CoopsService.get()
       dispatch(fetchRequestsSuccess(requests))
     } catch (error) {
       dispatch(fetchRequestsFail(error))
