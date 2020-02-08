@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import CoopsService from 'api/newservices/coops'
+import CoopsService from 'services/api/coopsApi'
 
 class Coops extends Component {
   componentDidMount() {

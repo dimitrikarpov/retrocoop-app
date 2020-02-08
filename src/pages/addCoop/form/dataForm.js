@@ -11,8 +11,8 @@ import EndsAtField from './components/EndsAtField'
 import PlatformField from './components/PlatformField'
 import Checkbox from 'components/forms/checkbox/Checkbox'
 import Radio from 'components/forms/radio/Radio'
-import RequestsService from 'api/services/requests'
-import GamesService from 'api/newservices/games'
+import GamesService from 'services/api/gamesApi'
+import CoopsService from 'services/api/coopsApi'
 import Autocomplete from 'components/forms/autocomplete/Autocomplete'
 
 const DataForm = ({ platforms }) => (
@@ -22,7 +22,7 @@ const DataForm = ({ platforms }) => (
       setSubmitting(true)
       // make async call
 
-      RequestsService.create(data)
+      CoopsService.create(data)
         .then(res => {
           console.log('created succefully', res)
           resetForm()

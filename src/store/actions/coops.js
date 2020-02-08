@@ -1,5 +1,5 @@
 import * as actionTypes from 'store/actions/actionsTypes'
-import CoopsService from 'api/newservices/coops'
+import CoopsService from 'services/api/coopsApi'
 
 const fetchCoopsStart = () => ({
   type: actionTypes.FETCH_REQESTS_START

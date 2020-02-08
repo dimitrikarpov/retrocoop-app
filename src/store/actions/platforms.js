@@ -1,5 +1,5 @@
 import * as actionTypes from 'store/actions/actionsTypes'
-import PlatformsService from 'api/newservices/platforms'
+import PlatformsService from 'services/api/platformsApi'
 
 export const fetchPlatforms = () => async dispatch => {
   dispatch({
