@@ -120,6 +120,9 @@ const DataForm = ({ platforms }) => (
 )
 
 const mapStateToProps = state => {
+
+  console.log('state', state)
+
   const statePlatforms = state.platforms.platforms
   const platforms = statePlatforms
     ? statePlatforms.reduce(

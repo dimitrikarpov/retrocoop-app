@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { fetchRequests } from 'store/actions/requests'
+import { fetchCoops } from 'store/actions/coops'
 
-class RequestsItems extends Component {
+class CoopsItems extends Component {
   componentDidMount() {
-    this.props.fetchRequests()
+    this.props.fetchCoops()
   }
 
   render() {
@@ -14,18 +14,18 @@ class RequestsItems extends Component {
 
 const mapStateToProps = state => {
   return {
-    requests: state.requests.requests,
-    loading: state.requests.loading
+    coops: state.coops.coops,
+    loading: state.coops.loading
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchRequests: () => dispatch(fetchRequests())
+    fetchCoops: () => dispatch(fetchCoops())
   }
 }
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(RequestsItems)
+)(CoopsItems)

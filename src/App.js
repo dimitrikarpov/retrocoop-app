@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import { fetchPlatforms } from 'store/actions/platforms'
-import Requests from 'pages/requests/Requests'
-import AddRequest from 'pages/addRequest/AddRequest'
+import Coops from 'pages/coops/Coops'
+import AddCoop from 'pages/addCoop/AddCoop'
 import NotFound from 'pages/notFound/NotFound'
 import Header from 'components/layout/header/Header'
 
@@ -17,8 +17,8 @@ class App extends Component {
       <BrowserRouter>
       <Header/>
         <Switch>
-          <Route path='/' exact component={Requests} />
-          <Route path='/add' component={AddRequest} />
+          <Route path='/' exact component={Coops} />
+          <Route path='/add' component={AddCoop} />
           <Route component={NotFound} />
         </Switch>
       </BrowserRouter>

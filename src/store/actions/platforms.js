@@ -10,7 +10,7 @@ export const fetchPlatforms = () => async dispatch => {
     const platforms = await PlatformsService.get()
     dispatch({
       type: actionTypes.FETCH_PLATFORMS_SUCCESS,
-      payload: platforms.data
+      payload: platforms.data.data
     })
   } catch (error) {
     dispatch({

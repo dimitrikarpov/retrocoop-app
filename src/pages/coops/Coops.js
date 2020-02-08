@@ -1,14 +1,14 @@
 import React, { Component } from 'react'
 import CoopsService from 'api/newservices/coops'
 
-class Requests extends Component {
+class Coops extends Component {
   componentDidMount() {
     CoopsService.get()
   }
 
   render() {
-    return <h1>Requests component</h1>
+    return <h1>Coops page</h1>
   }
 }
 
-export default Requests
+export default Coops
