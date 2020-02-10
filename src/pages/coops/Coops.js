@@ -3,7 +3,7 @@ import CoopsService from 'services/api/coopsApi'
 
 class Coops extends Component {
   componentDidMount() {
-    CoopsService.get()
+    // CoopsService.get()
   }
 
   render() {

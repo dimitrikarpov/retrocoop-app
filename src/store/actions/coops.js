@@ -7,7 +7,7 @@ const fetchCoopsStart = () => ({
 
 const fetchCoopsSuccess = coops => ({
   type: actionTypes.FETCH_REQESTS_SUCCESS,
-  payload: coops.data.data
+  payload: coops.data
 })
 
 const fetchCoopsFail = error => ({

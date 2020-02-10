@@ -2,10 +2,22 @@ import client from './client'
 
 const endpoint = '/requests'
 
-const get = (config = {}) => client.get(`${endpoint}`, config)
+const get = async (config = {}) => {
+    const res = await client.get(`${endpoint}`, config)
 
-const getOne = (id, config) => client.get(`${endpoint}/${id}`, config)
+    return res.data
+}
 
-const create = (data, config = {}) => client.post(`${endpoint}`, data, config)
+const getOne = async (id, config) => {
+    const res = await client.get(`${endpoint}/${id}`, config)
+
+    return res.data
+}
+
+const create = async (data, config = {}) => {
+    const res = await client.post(`${endpoint}`, data, config)
+
+    return res.data
+}
 
 export default { get, getOne, create }
