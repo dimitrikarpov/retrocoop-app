@@ -18,11 +18,10 @@ class Autocomplete extends Component {
 
     if (!input) {
       this.setState({input, options: []})
-
       return
     }
 
-    const res = await this.props.fetch({
+    const options = await this.props.fetch({
       params: {
         ...params,
         [`${field}[like]`]: input
@@ -30,7 +29,7 @@ class Autocomplete extends Component {
       transformResponse: [this.props.transformResponse]
     })
 
-    this.setState({ input, options: res.data })
+    this.setState({ input, options })
   }
 
   render() {

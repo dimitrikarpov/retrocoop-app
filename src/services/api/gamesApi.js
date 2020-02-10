@@ -2,14 +2,16 @@ import client from './client'
 
 const endpoint = '/games'
 
-const get = (config = {}) => {
-  const { params, transformResponse } = config
+const get = async (config = {}) => {
+  const res = await client.get(`${endpoint}`, config)
 
-  return client.get(`${endpoint}`, { params, transformResponse })
+  return res.data
 }
 
-const getOne = (id, config) => {
-  return client.get(`${endpoint}/${id}`, config)
+const getOne = async (id, config) => {
+  const res = client.get(`${endpoint}/${id}`, config)
+
+  return res.data
 }
 
 export default {
