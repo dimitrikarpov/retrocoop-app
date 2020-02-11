@@ -1,45 +1,82 @@
 import React, { Component } from 'react'
-import { func, string, bool } from 'prop-types'
+import { func, string, bool, oneOfType, number } from 'prop-types'
 import cn from 'classnames'
 import './styles.scss'
+import { findByTitle, findByValue } from './helpers'
 
 const params = { limit: 10 }
+
+// TODO:
+// * debounce
+// * memo
 
 class Autocomplete extends Component {
   state = {
     input: '',
     visible: true,
-    options: []
+    options: [],
+    value: ''
   }
 
   onChange = async e => {
+    const { value, options } = this.state
     const input = e.target.value
-    const field = this.props.field || this.props.name
+    let nextState = { ...this.state }
 
+    // Case when user input is empty
     if (!input) {
-      this.setState({ input, options: [] })
-      return
+      nextState = { ...nextState, options: [], input }
     }
 
-    const options = await this.props.fetch({
-      params: {
-        ...params,
-        [`${field}[like]`]: input
-      },
-      transformResponse: [this.props.mapper]
-    })
+    // Case when user type something
+    if (input) {
+      const field = this.props.field || this.props.name
 
-    this.setState({ input, options })
+      const options = await this.props.fetch({
+        params: {
+          ...params,
+          [`${field}[like]`]: input
+        },
+        transformResponse: [this.props.mapper]
+      })
+
+      nextState = { ...nextState, options, input, visible: true }
+    }
+
+    // Case when value was selected but then user updated input
+    const valueTitle = findByValue(value, options)
+    if (value && valueTitle !== input) {
+      nextState = { ...nextState, value: '' }
+      this.onChangeValue('')
+    }
+
+    // Case when user input equals on the options
+    const foundValue = findByTitle(input, options)
+    if (foundValue) {
+      nextState = { ...nextState, value: foundValue, visible: false }
+      this.onChangeValue(foundValue)
+    }
+
+    this.setState(nextState)
+  }
+
+  onSelect = (value, title) => {
+    this.onChangeValue(value)
+    this.setState({ visible: false, input: title, value })
+  }
+
+  onChangeValue = value => {
+    this.props.onChange(value)
   }
 
   render() {
-    const { input, visible, options } = this.state
+    const { visible, options, input } = this.state
     const { name, error, helperText } = this.props
 
     return (
       <div className='form-group'>
+        <input type='hidden' name={name} />
         <input
-          name={name}
           className='form-input'
           type='text'
           value={input}
@@ -53,7 +90,11 @@ class Autocomplete extends Component {
         >
           <ul className='suggestion-items'>
             {options.map(({ value, title }) => (
-              <li key={value} className='suggestion-item'>
+              <li
+                key={value}
+                className='suggestion-item'
+                onClick={() => this.onSelect(value, title)}
+              >
                 {title}
               </li>
             ))}
@@ -79,6 +120,8 @@ Autocomplete.defaultProps = {
 
 Autocomplete.propTypes = {
   name: string.isRequired,
+  value: oneOfType([string, number]).isRequired,
+  onChange: func.isRequired,
   fetch: func.isRequired,
   field: string,
   mapper: func,

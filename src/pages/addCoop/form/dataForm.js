@@ -11,9 +11,7 @@ import EndsAtField from './components/EndsAtField'
 import PlatformField from './components/PlatformField'
 import Checkbox from 'components/forms/checkbox/Checkbox'
 import Radio from 'components/forms/radio/Radio'
-import GamesService from 'services/api/gamesApi'
 import CoopsService from 'services/api/coopsApi'
-import Autocomplete from 'components/forms/autocomplete/Autocomplete'
 
 const DataForm = ({ platforms }) => (
   <Formik
@@ -44,21 +42,8 @@ const DataForm = ({ platforms }) => (
     }}
     validationSchema={validationSchema}
   >
-    {({ values, isSubmitting }) => (
+    {({ values, isSubmitting, setFieldValue }) => (
       <Form>
-        <Autocomplete
-          name='game2'
-          fetch={GamesService.get}
-          field='title'
-          mapper={response => {
-            const res = JSON.parse(response)
-            return res.data.map(game => ({
-              value: game.id,
-              title: game.title
-            }))
-          }}
-        />
-
         <div className='form-container'>
           <div className='form-grid'>
             <label htmlFor='starts_at'>Starts At</label>
@@ -71,7 +56,7 @@ const DataForm = ({ platforms }) => (
             <Field name='use_mic' type='checkbox' as={Checkbox} />
 
             <label htmlFor='game'>Game You Want To Play</label>
-            <Field name='game' as={GameField} />
+            <GameField name='game' type='text' setFieldValue={setFieldValue}/>
 
             <label htmlFor='platform'>Or choose platform</label>
             <Field

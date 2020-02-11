@@ -13,12 +13,12 @@ export const fooInterceptor = axiosInstance.interceptors.response.use(
 )
 
 const successHandler = response => {
-  console.log('in intercepror', response)
+  // console.log('in intercepror', response)
   return response
 }
 
 const errorHandler = error => {
-  console.log('response fails')
+  // console.log('response fails')
   return error
 }
 
