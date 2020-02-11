@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { func, string } from 'prop-types'
+import { func, string, bool } from 'prop-types'
 import cn from 'classnames'
 import './styles.scss'
 
@@ -17,7 +17,7 @@ class Autocomplete extends Component {
     const field = this.props.field || this.props.name
 
     if (!input) {
-      this.setState({input, options: []})
+      this.setState({ input, options: [] })
       return
     }
 
@@ -26,7 +26,7 @@ class Autocomplete extends Component {
         ...params,
         [`${field}[like]`]: input
       },
-      transformResponse: [this.props.transformResponse]
+      transformResponse: [this.props.mapper]
     })
 
     this.setState({ input, options })
@@ -34,20 +34,18 @@ class Autocomplete extends Component {
 
   render() {
     const { input, visible, options } = this.state
-    const { name } = this.props
+    const { name, error, helperText } = this.props
 
     return (
-      <div className='autocomplete'>
-        <div className='input__wrapper'>
-          <input
-            name={name}
-            className='input'
-            type='text'
-            value={input}
-            onChange={this.onChange}
-            autoComplete='off'
-          />
-        </div>
+      <div className='form-group'>
+        <input
+          name={name}
+          className='form-input'
+          type='text'
+          value={input}
+          onChange={this.onChange}
+          autoComplete='off'
+        />
         <div
           className={cn('suggestions__wrapper', {
             'suggestions__wrapper--hidden': !visible
@@ -61,20 +59,31 @@ class Autocomplete extends Component {
             ))}
           </ul>
         </div>
+        <span
+          className={cn('form-input__helper-text', {
+            'form-input__helper-text--error': error
+          })}
+        >
+          {helperText}
+        </span>
       </div>
     )
   }
 }
 
 Autocomplete.defaultProps = {
-  transformResponse: () => {}
+  mapper: () => {},
+  error: false,
+  helperText: ''
 }
 
 Autocomplete.propTypes = {
   name: string.isRequired,
   fetch: func.isRequired,
   field: string,
-  transformResponse: func
+  mapper: func,
+  error: bool,
+  helperText: string
 }
 
 export default Autocomplete

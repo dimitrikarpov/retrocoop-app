@@ -50,9 +50,9 @@ const DataForm = ({ platforms }) => (
           name='game2'
           fetch={GamesService.get}
           field='title'
-          transformResponse={response => {
-            const data = JSON.parse(response)
-            return data.data.map(game => ({
+          mapper={response => {
+            const res = JSON.parse(response)
+            return res.data.map(game => ({
               value: game.id,
               title: game.title
             }))
@@ -120,9 +120,6 @@ const DataForm = ({ platforms }) => (
 )
 
 const mapStateToProps = state => {
-
-  console.log('state', state)
-
   const statePlatforms = state.platforms.platforms
   const platforms = statePlatforms
     ? statePlatforms.reduce(
