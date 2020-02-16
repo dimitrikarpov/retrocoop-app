@@ -1,7 +1,7 @@
 import * as yup from 'yup'
 
 export const initialValues = {
-  game: 'ррррлр',
+  game: '',
   platform: '',
   skill: '',
   use_mic: true,

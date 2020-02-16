@@ -3,6 +3,7 @@ import { func, string, bool, oneOfType, number } from 'prop-types'
 import cn from 'classnames'
 import './styles.scss'
 import { findByTitle, findByValue } from './helpers'
+import TextField from 'components/forms/textField/TextField'
 import Dropdown from 'components/forms/dropdown/Dropdown'
 
 const params = { limit: 10 }
@@ -82,25 +83,16 @@ class Autocomplete extends Component {
     return (
       <div className='form-group'>
         <input type='hidden' name={name} />
-        <input
-          className='form-input'
-          type='text'
+
+        <TextField
+          name='someField'
           value={input}
           onChange={this.onChange}
-          autoComplete='off'
+          helperText={helperText}
+          error={error}
         />
-        <Dropdown
-          hidden={hidden}
-          options={options}
-          onChange={this.onSelect}
-        />
-        <span
-          className={cn('form-input__helper-text', {
-            'form-input__helper-text--error': error
-          })}
-        >
-          {helperText}
-        </span>
+
+        <Dropdown hidden={hidden} options={options} onChange={this.onSelect} />
       </div>
     )
   }
