@@ -3,6 +3,7 @@ import { func, string, bool, oneOfType, number } from 'prop-types'
 import cn from 'classnames'
 import './styles.scss'
 import { findByTitle, findByValue } from './helpers'
+import Dropdown from 'components/forms/dropdown/Dropdown'
 
 const params = { limit: 10 }
 
@@ -13,7 +14,7 @@ const params = { limit: 10 }
 class Autocomplete extends Component {
   state = {
     input: '',
-    visible: true,
+    hidden: true,
     options: [],
     value: ''
   }
@@ -40,7 +41,7 @@ class Autocomplete extends Component {
         transformResponse: [this.props.mapper]
       })
 
-      nextState = { ...nextState, options, input, visible: true }
+      nextState = { ...nextState, options, input, hidden: false }
     }
 
     // Case when value was selected but then user updated input
@@ -53,16 +54,21 @@ class Autocomplete extends Component {
     // Case when user input equals on the options
     const foundValue = findByTitle(input, options)
     if (foundValue) {
-      nextState = { ...nextState, value: foundValue, visible: false }
+      nextState = { ...nextState, value: foundValue, hidden: true }
       this.onChangeValue(foundValue)
     }
 
     this.setState(nextState)
   }
 
-  onSelect = (value, title) => {
+  onSelect = value => {
+    const { options } = this.state
     this.onChangeValue(value)
-    this.setState({ visible: false, input: title, value })
+    this.setState({
+      hidden: true,
+      input: findByValue(value, options),
+      value
+    })
   }
 
   onChangeValue = value => {
@@ -70,7 +76,7 @@ class Autocomplete extends Component {
   }
 
   render() {
-    const { visible, options, input } = this.state
+    const { hidden, options, input } = this.state
     const { name, error, helperText } = this.props
 
     return (
@@ -83,23 +89,11 @@ class Autocomplete extends Component {
           onChange={this.onChange}
           autoComplete='off'
         />
-        <div
-          className={cn('suggestions__wrapper', {
-            'suggestions__wrapper--hidden': !visible
-          })}
-        >
-          <ul className='suggestion-items'>
-            {options.map(({ value, title }) => (
-              <li
-                key={value}
-                className='suggestion-item'
-                onClick={() => this.onSelect(value, title)}
-              >
-                {title}
-              </li>
-            ))}
-          </ul>
-        </div>
+        <Dropdown
+          hidden={hidden}
+          options={options}
+          onChange={this.onSelect}
+        />
         <span
           className={cn('form-input__helper-text', {
             'form-input__helper-text--error': error

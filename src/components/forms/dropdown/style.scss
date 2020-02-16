@@ -1,0 +1,29 @@
+.dropdown__wrap {
+    border: 1px solid #e85f99;
+
+    &--hidden {
+      display: none;
+    }
+  }
+
+  .list-items {
+    background-color: #65587f;
+    color: #f18867;
+    max-height: 10rem;
+    overflow: scroll;
+    overflow-x: hidden;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .list-item {
+
+    padding: .3rem;
+
+    &:hover {
+      color: #65587f;
+      background-color: #f18867;
+      cursor: pointer;
+    }
+  }
