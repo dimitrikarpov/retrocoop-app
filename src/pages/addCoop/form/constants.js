@@ -16,7 +16,7 @@ export const validationSchema = yup.object({
     .string()
     .required()
     .max(25),
-  platform: yup.number(),
+  platform: yup.number().required(),
   starts_at: yup.date().required(),
   ends_at: yup.date().required()
 })

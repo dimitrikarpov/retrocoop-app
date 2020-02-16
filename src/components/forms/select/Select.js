@@ -1,7 +1,8 @@
 import React from 'react'
-import { string, arrayOf, func, shape, bool } from 'prop-types'
+import { string, arrayOf, func, shape } from 'prop-types'
 import cn from 'classnames'
 import '../styles.scss'
+import FormGroup from 'components/forms/formGroup/FormGroup'
 
 const Select = ({
   name,
@@ -12,7 +13,7 @@ const Select = ({
   error,
   onChange
 }) => (
-  <div className='form-group'>
+  <FormGroup error={error} helperText={helperText}>
     <select
       name={name}
       value={value}
@@ -26,19 +27,11 @@ const Select = ({
         </option>
       ))}
     </select>
-    <span
-      className={cn('form-input__helper-text', {
-        'form-input__helper-text--error': error
-      })}
-    >
-      {helperText}
-    </span>
-  </div>
+  </FormGroup>
 )
 
 Select.defaultProps = {
-  value: '',
-  error: false
+  value: ''
 }
 
 Select.propTypes = {
@@ -51,8 +44,6 @@ Select.propTypes = {
     })
   ).isRequired,
   placeholder: string,
-  helperText: string,
-  error: bool,
   onChange: func.isRequired
 }
 

@@ -16,6 +16,7 @@ import CoopsService from 'services/api/coopsApi'
 const DataForm = ({ platforms }) => (
   <Formik
     initialValues={initialValues}
+    validationSchema={validationSchema}
     onSubmit={(data, { setSubmitting, resetForm, setErrors }) => {
       setSubmitting(true)
       // make async call
@@ -37,10 +38,9 @@ const DataForm = ({ platforms }) => (
             console.log('Error while creating new COOP', error)
           }
         })
-
       setSubmitting(false)
     }}
-    validationSchema={validationSchema}
+
   >
     {({ values, isSubmitting, setFieldValue }) => (
       <Form>

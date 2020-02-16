@@ -1,7 +1,8 @@
 import React from 'react'
-import { string, oneOfType, number, oneOf, bool, func } from 'prop-types'
+import { string, oneOfType, number, oneOf, func } from 'prop-types'
 import cn from 'classnames'
 import '../styles.scss'
+import FormGroup from 'components/forms/formGroup/FormGroup'
 
 const TextField = ({
   name,
@@ -12,7 +13,7 @@ const TextField = ({
   error,
   onChange
 }) => (
-  <div className='form-group'>
+  <FormGroup error={error} helperText={helperText}>
     <input
       className={cn('form-input', { 'form-input--error': error })}
       name={name}
@@ -22,28 +23,18 @@ const TextField = ({
       placeholder={placeholder}
       autoComplete='off'
     />
-    <span
-      className={cn('form-input__helper-text', {
-        'form-input__helper-text--error': error
-      })}
-    >
-      {helperText}
-    </span>
-  </div>
+  </FormGroup>
 )
 
 TextField.defaultProps = {
-  type: 'text',
-  error: false
+  type: 'text'
 }
 
 TextField.propTypes = {
   name: string.isRequired,
   value: oneOfType([string, number]).isRequired,
   placeholder: string,
-  helperText: string,
   type: oneOf(['text', 'number', 'date', 'time', 'email', 'datetime-local']),
-  error: bool,
   onChange: func.isRequired
 }
 
