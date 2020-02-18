@@ -2,18 +2,15 @@ import React from 'react'
 import { string, arrayOf, func, shape } from 'prop-types'
 import cn from 'classnames'
 import '../styles.scss'
-import FormGroup from 'components/forms/formGroup/FormGroup'
 
 const Select = ({
   name,
   value,
   options,
   placeholder,
-  helperText,
   error,
   onChange
 }) => (
-  <FormGroup error={error} helperText={helperText}>
     <select
       name={name}
       value={value}
@@ -27,7 +24,6 @@ const Select = ({
         </option>
       ))}
     </select>
-  </FormGroup>
 )
 
 Select.defaultProps = {

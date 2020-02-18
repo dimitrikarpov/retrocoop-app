@@ -1,5 +1,5 @@
 import React from 'react'
-import PropTypes, { bool, func, arrayOf, shape, string } from 'prop-types'
+import { bool, func, arrayOf, shape, string } from 'prop-types'
 import './style.scss'
 import cn from 'classnames'
 
@@ -25,7 +25,7 @@ Dropdown.propTypes = {
   hidden: bool,
   onChange: func.isRequired,
   options: arrayOf(
-    PropTypes.shape({
+    shape({
       title: string.isRequired,
       value: string.isRequired
     })

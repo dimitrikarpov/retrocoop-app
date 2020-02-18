@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { func, string, bool, oneOfType, number } from 'prop-types'
-import cn from 'classnames'
 import './styles.scss'
 import { findByTitle, findByValue } from './helpers'
 import TextField from 'components/forms/textField/TextField'
@@ -78,7 +77,7 @@ class Autocomplete extends Component {
 
   render() {
     const { hidden, options, input } = this.state
-    const { name, error, helperText } = this.props
+    const { name, error } = this.props
 
     return (
       <div className='form-group'>
@@ -88,7 +87,6 @@ class Autocomplete extends Component {
           name='someField'
           value={input}
           onChange={this.onChange}
-          helperText={helperText}
           error={error}
         />
 
@@ -100,8 +98,7 @@ class Autocomplete extends Component {
 
 Autocomplete.defaultProps = {
   mapper: () => {},
-  error: false,
-  helperText: ''
+  error: false
 }
 
 Autocomplete.propTypes = {
@@ -111,8 +108,7 @@ Autocomplete.propTypes = {
   fetch: func.isRequired,
   field: string,
   mapper: func,
-  error: bool,
-  helperText: string
+  error: bool
 }
 
 export default Autocomplete

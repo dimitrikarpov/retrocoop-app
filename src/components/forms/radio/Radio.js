@@ -1,5 +1,5 @@
 import React from 'react'
-import PropTypes from 'prop-types'
+import {string, oneOfType, bool, func} from 'prop-types'
 
 const Radio = ({ name, disabled, onChange, checked, value }) => (
   <input
@@ -21,9 +21,9 @@ Radio.defaultProps = {
 }
 
 Radio.propTypes = {
-  name: PropTypes.string.isRequired,
-  value: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
-  checked: PropTypes.bool.isRequired,
-  disabled: PropTypes.bool,
-  onChange: PropTypes.func.isRequired
+  name: string.isRequired,
+  value: oneOfType([string, bool]),
+  checked: bool.isRequired,
+  disabled: bool,
+  onChange: func.isRequired
 }
